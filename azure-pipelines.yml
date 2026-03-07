@@ -9,6 +9,14 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+  # Add this section to link your Library group
+variables:
+- group: 'Portfolio-Secrets' 
+
+steps:
+- task: UsePythonVersion@0
+  # ... (rest of your existing steps)
+
 steps:
 - task: UsePythonVersion@0
   inputs:
