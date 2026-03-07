@@ -1,36 +1,29 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
-
 trigger:
 - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-  # Add this section to link your Library group
+# This links your pipeline to the 'Portfolio-Secrets' group in the Library
 variables:
-- group: 'Portfolio-Secrets' 
-
-steps:
-- task: UsePythonVersion@0
-  # ... (rest of your existing steps)
+- group: 'Portfolio-Secrets'
 
 steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.9'
     addToPath: true
+  displayName: 'Set Python Version to 3.9'
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r requirements.txt
+    if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   displayName: 'Install dependencies'
 
 - script: |
     # This runs your portfolio monitor once to ensure it works
     python monitor_portfolio.py
   env:
-    SLACK_WEBHOOK_URL: $(SLACK_WEBHOOK) # Secret variable stored in Azure
+    # This maps the Library secret to an Environment Variable the script can read
+    SLACK_WEBHOOK_URL: $(SLACK_WEBHOOK) 
   displayName: 'Run Portfolio Monitor Test'
