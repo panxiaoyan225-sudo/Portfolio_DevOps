@@ -1,5 +1,9 @@
 # Disable the automatic trigger on code push to avoid double-runs
-trigger: none
+#trigger: none
+trigger:
+  branches:
+    include:
+      - main # enable the trigger, can be removed to disable the trigger
 
 # This is your cron job configuration
 schedules:
@@ -27,6 +31,12 @@ steps:
     python -m pip install --upgrade pip
     if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   displayName: 'Install dependencies'
+
+- script: |
+    # Run a test script that checks if your Slack Webhook is valid 
+    # and if your ticker list is not empty.
+    python -m pytest tests/test_config.py
+  displayName: 'Validate Logic & Config'
 
 - script: |
     python monitor_portfolio.py
