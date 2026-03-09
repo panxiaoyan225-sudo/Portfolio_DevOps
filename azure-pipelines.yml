@@ -14,9 +14,14 @@ schedules:
     - main
   always: true # Set to true to run even if you haven't changed the code
 
+# The 'pool' section specifies the environment (virtual machine image) in which the pipeline's jobs will run.
+# 'ubuntu-latest' tells Azure Pipelines to use the latest available Ubuntu Linux virtual machine for this job.
 pool:
   vmImage: 'ubuntu-latest'
 
+
+# The 'variables' block below pulls secret variables (e.g., API tokens, URLs) from the Azure DevOps variable group named 'Portfolio-Secrets'.
+# These secrets are securely injected into the pipeline at runtime, so sensitive data isn't hard-coded in the YAML or codebase.
 variables:
 - group: 'Portfolio-Secrets'
 
@@ -35,6 +40,9 @@ steps:
 - script: |
     # Run a test script that checks if your Slack Webhook is valid 
     # and if your ticker list is not empty.
+    # This command runs any unit tests defined in tests/test_config.py using pytest.
+    # It helps validate project configuration (such as secret variables or environment setup)
+    # before proceeding further in the pipeline. If these tests fail, the pipeline will halt.
     python -m pytest tests/test_config.py
   displayName: 'Validate Logic & Config'
 
