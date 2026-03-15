@@ -1,54 +1,46 @@
-# 🚀 Portfolio Monitor & Auto-Warmer
+Portfolio Monitor & Auto-Warmer
+Technical implementations of automated infrastructure workflows designed for high-reliability cloud environments. This framework bridges the gap between Cold Start mitigation and Strategic Risk management through automated health checks and real-time alerting.
 
-An automated monitoring and orchestration pipeline using **Azure DevOps** designed to eliminate **"Cold Start"** latency on Google Cloud Run while providing real-time infrastructure alerts via Slack.
+🎯 Project Philosophy
+Most modern cloud-native applications suffer from "Cold Start" latency on serverless platforms. This project demonstrates a high-performance, low-footprint architecture optimized for Google Cloud Run. By migrating from local scheduling to a cloud-native Azure DevOps environment, I achieved 100% environment consistency while maintaining production-grade reliability.
 
----
+🏗️ System Architecture
+The framework orchestrates infrastructure health through four specialized layers:
 
-## 📋 Overview
-This project provides a "Single Source of Truth" for infrastructure health, serving a triple purpose:
-1.  **Cold Start Mitigation:** Periodically "pings" the Google Cloud Run hosted portfolio to ensure the container remains warm and responsive for visitors.
-2.  **Strategic Risk Mitigation:** Automatically validates project configurations and logic before execution to eliminate human error and environment drift.
-3.  **Real-time Alerting:** Dispatches status reports and performance metrics to a dedicated Slack channel.
+Ingestion Layer: Periodic "Heartbeat" triggers via YAML-based cron schedules.
 
-## 🛠️ Technical Stack
-* **Language:** Python 3.9
-* **Cloud Provider:** Google Cloud Platform (Cloud Run)
-* **Orchestration:** **Azure DevOps (Azure Pipelines)**
-* **Automation:** YAML-based CI/CD Pipelines
-* **Testing:** Pytest (Logic & Config Validation)
-* **Communication:** Slack API (WebClient/Webhooks)
+Validation Layer (The Gatekeeper): A custom pytest suite that enforces configuration integrity and credential validation before execution.
 
----
+Persistence Layer: Secure management of sensitive tokens using Azure DevOps Secret Variables.
 
-## ⚙️ Architecture & Automation
+Audit & Alerting: A Slack-integrated monitoring system that detects performance anomalies and pushes real-time status notifications.
 
-### 1. Cloud-Native Orchestration (Azure Pipelines)
-The project has migrated from local Windows Task Scheduling to a fully containerized **Azure DevOps** workflow. This ensures 100% environment consistency:
-* **Scheduled Heartbeat:** Controlled via `cron` schedules within `azure-pipelines.yml`, keeping the Cloud Run instance active without manual intervention.
-* **Automated Validation:** Includes a dedicated `Validate Logic & Config` stage using `pytest` to verify Slack Webhooks and ticker lists before the main monitor runs.
-* **Secret Management:** Sensitive tokens are injected via Azure Pipeline environment variables (`SLACK_WEBHOOK_URL`), removing the risk of hardcoded credentials.
+🔄 The Pipelines
+Cloud Run Warmer: Periodically pings the hosted portfolio to ensure the container remains warm and responsive for visitors, eliminating latency.
 
-### 2. The Slack Integration
-The system integrates with a custom Slack App to provide immediate transparency into the pipeline's health.
-* **Automated Feedback:** Provides immediate visual confirmation (e.g., ✅ status) upon successful pings or failure alerts for immediate troubleshooting.
-* **Error Trapping:** If the validation scripts detect a configuration error, the pipeline halts immediately and notifies the owner, preventing "silent failures."
+Infrastructure Health Flow: Dispatches detailed performance metrics and automated feedback (✅/❌) to a dedicated Slack channel for immediate transparency.
 
----
+Strategic Risk Validator: A specialized stage that acts as a pre-load gatekeeper, checking for environment drift and preventing "silent failures."
 
-## 🚀 Installation & Setup
+🛠️ Technical Stack
+Cloud Provider: Google Cloud Platform (Cloud Run).
 
-### Azure DevOps Configuration
-1.  **Pipeline Import:** Create a new pipeline in Azure DevOps pointing to this repository.
-2.  **Variables:** Define the following secret variable in your **Azure Pipeline Library** or Variable Group:
-    * `SLACK_WEBHOOK`: Your unique Slack Webhook URL.
-3.  **Deployment:** The `azure-pipelines.yml` handles the environment setup (`Python 3.9`), dependency installation, and execution.
+Orchestration: Azure DevOps (Azure Pipelines).
 
-### Local Development & Testing
-```bash
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+Automation: Python 3.9 & YAML-based CI/CD.
 
+Monitoring: Slack API (Webhooks) & Pytest.
+
+🚀 Installation & Setup
+Azure DevOps Configuration
+Pipeline Import: Create a new pipeline pointing to this repository.
+
+Variables: Define SLACK_WEBHOOK in your Azure Pipeline Library.
+
+Deployment: The azure-pipelines.yml handles environment setup and execution.
+
+Local Development
+Bash
 # Install dependencies
 pip install -r requirements.txt
 
@@ -56,4 +48,4 @@ pip install -r requirements.txt
 python -m pytest tests/test_config.py
 
 # Run Monitor Manually
-python monitor_portfolio
+python monitor_portfolio.py
