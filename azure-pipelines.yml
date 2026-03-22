@@ -15,7 +15,7 @@ schedules:
 # The 'pool' section specifies the environment (virtual machine image) in which the pipeline's jobs will run.
 # 'ubuntu-latest' tells Azure Pipelines to use the latest available Ubuntu Linux virtual machine for this job.
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'MyLocalLaptop'
 
 
 # The 'variables' block below pulls secret variables (e.g., API tokens, URLs) from the Azure DevOps variable group named 'Portfolio-Secrets'.
