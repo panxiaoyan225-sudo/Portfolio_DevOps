@@ -24,13 +24,11 @@ variables:
 - group: 'Portfolio-Secrets'
 
 steps:
-  # Step 1: Set up the required Python version for the pipeline.
-  # This ensures that Python 3.9 is used for all subsequent steps.
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.11'  # Changed from 3.9 to 3.11 for library compatibility
-    addToPath: true
-  displayName: 'Set Python Version to 3.11'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'
+      addToPath: true
+    displayName: 'Set Python Version to 3.11'
 
   # Step 2: Install dependencies.
   # This upgrades pip to the latest version.
