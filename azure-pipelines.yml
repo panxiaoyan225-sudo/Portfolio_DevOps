@@ -42,6 +42,14 @@ steps:
       )
     displayName: 'Install dependencies'
 
+  # --- NEW VALIDATION STEP ---
+  - script: |
+      python -c "import os; assert os.getenv('SLACK_TOKEN'), 'ERROR: SLACK_TOKEN is missing from Variable Group'"
+      python -m py_compile monitor_portfolio.py
+    env:
+      SLACK_TOKEN: $(SLACK_TOKEN)
+    displayName: 'Validate Logic & Config'  
+
   - script: |
       python monitor_portfolio.py
     env:
