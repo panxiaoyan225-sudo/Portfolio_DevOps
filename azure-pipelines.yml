@@ -41,4 +41,5 @@ steps:
       python monitor_portfolio.py
     env:
       SLACK_TOKEN: $(SLACK_TOKEN)
+      PYTHONUTF8: 1  # This forces Windows to support emojis in the terminal
     displayName: 'Run Portfolio Monitor'
