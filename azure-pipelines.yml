@@ -35,9 +35,12 @@ steps:
   # Step 2: Install dependencies.
   # This upgrades pip to the latest version.
   # If a requirements.txt file exists, it will install all dependencies listed in it.
+  # Step 2: Install dependencies (Windows Version)
   - script: |
       python -m pip install --upgrade pip
-      if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      if exist requirements.txt (
+          pip install -r requirements.txt
+      )
     displayName: 'Install dependencies'
 
   # Step 3: Validate logic and configuration.
