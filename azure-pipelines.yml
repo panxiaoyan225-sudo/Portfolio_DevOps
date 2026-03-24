@@ -3,42 +3,35 @@ trigger:
     include:
     - main
 
-schedules:
-- cron: "0 0 1 * *"
-  displayName: "Monthly Portfolio Warm-up"
-  branches:
-    include:
-    - main
-  always: true
-
 pool:
   name: 'MyLocalLaptop'
 
 variables:
 - group: 'Portfolio-Secrets'
-# We point directly to the python command to avoid using the failing 'UsePythonVersion' task
+# Using the exact physical path discovered on your machine
 - name: pythonExe
-  value: 'python'
+  value: 'C:\Users\ADMIN\AppData\Local\Programs\Python\Python311\python.exe'
 
 steps:
-  # REMOVED: UsePythonVersion@0 (This was causing the Registry Permission error)
+  - checkout: self
+    clean: true
 
   - script: |
-      $(pythonExe) -m pip install --upgrade pip
+      "$(pythonExe)" -m pip install --upgrade pip
       if exist requirements.txt (
-          $(pythonExe) -m pip install -r requirements.txt
+          "$(pythonExe)" -m pip install -r requirements.txt
       )
     displayName: 'Install dependencies'
 
   - script: |
-      $(pythonExe) -c "import os; assert os.getenv('SLACK_TOKEN'), 'ERROR: SLACK_TOKEN is missing from Variable Group'"
-      $(pythonExe) -m py_compile monitor_portfolio.py
+      "$(pythonExe)" -c "import os; assert os.getenv('SLACK_TOKEN'), 'ERROR: SLACK_TOKEN is missing'"
+      "$(pythonExe)" -m py_compile monitor_portfolio.py
     env:
       SLACK_TOKEN: $(SLACK_TOKEN)
     displayName: 'Validate Logic & Config'  
 
   - script: |
-      $(pythonExe) monitor_portfolio.py
+      "$(pythonExe)" monitor_portfolio.py
     env:
       SLACK_TOKEN: $(SLACK_TOKEN)
       PYTHONUTF8: 1
