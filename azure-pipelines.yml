@@ -1,6 +1,15 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  # This MUST match the name of the agent you installed on your laptop
+  name: 'MyLocalLaptop'
+
 variables:
 - group: 'Portfolio-Secrets'
-# Use FORWARD SLASHES to avoid "unknown escape character" or "path not found" errors
+# Using forward slashes and the confirmed path to your local Python 3.11
 - name: pythonExe
   value: 'C:/Users/ADMIN/AppData/Local/Programs/Python/Python311/python.exe'
 
@@ -8,7 +17,6 @@ steps:
   - checkout: self
     clean: true
 
-  # We use double quotes around the variable in case there are spaces in the path
   - script: |
       "$(pythonExe)" -m pip install --upgrade pip
       if exist requirements.txt (
