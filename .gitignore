@@ -3,3 +3,4 @@ venv/
 monitor_log.txt
 __pycache__/
 portfolio_monitor.yml
+monitor_Slack.py
