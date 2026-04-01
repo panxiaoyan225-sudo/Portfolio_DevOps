@@ -21,6 +21,8 @@ def send_slack_notification(message):
     
     try:
         response = requests.post(url, headers=headers, json=payload)
+        #This is the actual "send" button. It takes all the information (the URL, your API token, and your message) 
+        # and pushes it over the internet to Slack's servers
         response_json = response.json()
         if response_json.get("ok"):
             print("🚀 Slack notification sent successfully!")

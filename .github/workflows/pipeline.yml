@@ -5,9 +5,8 @@ on:
     branches:
       - main
   schedule:
-    # This runs at the start of every hour from 9:00 UTC to 23:00 UTC
-    # Which corresponds to 5:00 AM to 19:00 PM in your local time
-    - cron: '0 9-23 * * *'
+    # This runs at the 15th minute of every hour (e.g., 1:15, 2:15, etc.)
+    - cron: '15 * * * *'
   workflow_dispatch: # Allows you to run it manually from the Actions tab
 
 jobs:
