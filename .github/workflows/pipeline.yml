@@ -7,7 +7,7 @@ on:
   schedule:
     # This covers 6:45 AM EDT to 19:45 PM EDT
     # UTC 10:45 to 23:45
-    - cron: '45 10-23 * * *' # 10:15 AM to 7:15 PM EDT
+    - cron: '45 10-23 * * *' 
     #- cron: '15 0-3 * * *'   # 8:15 PM to 11:15 PM EDT
   workflow_dispatch:
 
