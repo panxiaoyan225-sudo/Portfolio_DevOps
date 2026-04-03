@@ -9,36 +9,6 @@ Most modern cloud-native applications suffer from "Cold Start" latency on server
 ## 🏗️ System Architecture
 
 The framework orchestrates infrastructure health through five specialized layers.
-
-### **Architecture Diagram**
-
-```mermaid
-graph TD
-    subgraph "Orchestration Layer"
-        GH[GitHub Actions] -- cron/push --> Runner[Self-Hosted Windows Agent]
-        ADO[Azure DevOps Pipelines] -- cron/push --> Runner
-    end
-
-    subgraph "Validation & Security"
-        Runner --> Env[Python 3.12 / UTF-8 Environment]
-        Secrets1[(Azure Variable Groups)] -.-> Runner
-        Secrets2[(GitHub Secrets)] -.-> Runner
-        Runner --> Gate{Fail-Fast Logic Gate}
-    end
-
-    subgraph "Execution & Delivery"
-        Gate -- Success --> Warm[HTTP Warmer / Health Check]
-        Warm -- Ping --> GCR[Google Cloud Run Portfolio]
-        GCR -- Status 200 --> Notify[Slack API Notification]
-        Gate -- Failure --> Alert[Real-time Error Alert]
-        Alert --> Notify
-    end
-
-    style GCR fill:#4285F4,color:#fff
-    style Notify fill:#4A154B,color:#fff
-    style Gate fill:#f96,stroke:#333 ```
-
-
 1. **Ingestion Layer:** Multi-channel ingestion supporting **GitHub**, **GitHub Actions**, and **Azure DevOps Repos**. Any `git push` to either origin triggers a parallel automated workflow.
 2. **Validation Layer (The Gatekeeper):** A "Fail-Fast" pre-check stage that validates environment variables (e.g., `SLACK_TOKEN`) and performs syntax compilation before script execution.
 3. **Environment Sync:** Automated dependency management and Python 3.12 configuration with native UTF-8 support for cross-platform log compatibility.
