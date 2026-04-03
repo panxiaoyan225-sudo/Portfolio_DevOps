@@ -8,6 +8,8 @@ Most modern cloud-native applications suffer from "Cold Start" latency on server
 
 ## 🏗️ System Architecture
 
+The framework orchestrates infrastructure health through five specialized layers.
+
 ### **Architecture Diagram**
 
 ```mermaid
@@ -35,8 +37,6 @@ graph TD
     style GCR fill:#4285F4,color:#fff
     style Notify fill:#4A154B,color:#fff
     style Gate fill:#f96,stroke:#333
-
-The framework orchestrates infrastructure health through five specialized layers:
 
 1. **Ingestion Layer:** Multi-channel ingestion supporting **GitHub**, **GitHub Actions**, and **Azure DevOps Repos**. Any `git push` to either origin triggers a parallel automated workflow.
 2. **Validation Layer (The Gatekeeper):** A "Fail-Fast" pre-check stage that validates environment variables (e.g., `SLACK_TOKEN`) and performs syntax compilation before script execution.
