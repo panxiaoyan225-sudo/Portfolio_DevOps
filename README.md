@@ -36,7 +36,7 @@ graph TD
 
     style GCR fill:#4285F4,color:#fff
     style Notify fill:#4A154B,color:#fff
-    style Gate fill:#f96,stroke:#333
+    style Gate fill:#f96,stroke:#333 ```
 
 
 1. **Ingestion Layer:** Multi-channel ingestion supporting **GitHub**, **GitHub Actions**, and **Azure DevOps Repos**. Any `git push` to either origin triggers a parallel automated workflow.
