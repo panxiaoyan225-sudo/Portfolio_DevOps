@@ -38,6 +38,7 @@ graph TD
     style Notify fill:#4A154B,color:#fff
     style Gate fill:#f96,stroke:#333
 
+
 1. **Ingestion Layer:** Multi-channel ingestion supporting **GitHub**, **GitHub Actions**, and **Azure DevOps Repos**. Any `git push` to either origin triggers a parallel automated workflow.
 2. **Validation Layer (The Gatekeeper):** A "Fail-Fast" pre-check stage that validates environment variables (e.g., `SLACK_TOKEN`) and performs syntax compilation before script execution.
 3. **Environment Sync:** Automated dependency management and Python 3.12 configuration with native UTF-8 support for cross-platform log compatibility.
