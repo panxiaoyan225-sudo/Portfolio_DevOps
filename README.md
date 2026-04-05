@@ -1,5 +1,5 @@
 # Portfolio Monitor & Auto-Warmer
-[🚀 View Interactive Infographic](https://panxiaoyan225-sudo.github.io/Portfolio_DevOps/infographic.html)
+[🚀 View Pipeline Logic Infographic](https://panxiaoyan225-sudo.github.io/Portfolio_DevOps/infographic.html)
 
 Production-grade CI/CD pipeline with triple-platform orchestration (GitHub Actions, Azure DevOps, and GitHub Repos) handling automated "heartbeat" runs, real-time anomaly detection, and seamless ETL syncing.
 
