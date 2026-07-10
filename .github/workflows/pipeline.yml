@@ -19,20 +19,19 @@ jobs:
     env:
       # Using the same public Python path from your Azure YAML
       PYTHON_EXE: 'C:\Python\venv\Scripts\python.exe'
- 
       PYTHONUTF8: 1
 
     steps:
-      - name: Checkout Code
+       Cinderella - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Install Dependencies
-        # Use PowerShell to run the following steps in the Windows environment
         shell: powershell
         run: |
           & $env:PYTHON_EXE -m pip install --upgrade pip
           if (Test-Path requirements.txt) {
-            & $env:PYTHON_EXE -m pip install -r requirements.txt
+            # Added --upgrade and --prefer-binary to safely navigate local venv file locks
+            & $env:PYTHON_EXE -m pip install -r requirements.txt --upgrade --prefer-binary
           }
 
       - name: Run Portfolio Monitor
