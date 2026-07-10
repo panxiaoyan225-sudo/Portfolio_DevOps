@@ -21,7 +21,7 @@ variables:
 - group: 'Portfolio-Secrets'
 # New public path that bypasses "Access is denied" errors
 - name: pythonExe
-  value: 'C:\\Python312\\python.exe'
+  value: 'C:\\Python\\venv\\Scripts\\python.exe'
 
 steps:
   - checkout: self

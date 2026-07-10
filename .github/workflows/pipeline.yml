@@ -18,7 +18,8 @@ jobs:
 
     env:
       # Using the same public Python path from your Azure YAML
-      PYTHON_EXE: 'C:\Python312\python.exe'
+      PYTHON_EXE: 'C:\Python\venv\Scripts\python.exe'
+ 
       PYTHONUTF8: 1
 
     steps:

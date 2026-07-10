@@ -3,7 +3,7 @@ import os
 import time
 
 # 1. CONFIGURATION
-PORTFOLIO_URL = "https://xiaoyan-pan-data-analytics-portfolio-170069322954.us-west1.run.app/"
+PORTFOLIO_URL = "https://xiaoyanpan.com/"
 SLACK_TOKEN = os.getenv("SLACK_TOKEN")
 SLACK_CHANNEL = "#portfolio"
 
