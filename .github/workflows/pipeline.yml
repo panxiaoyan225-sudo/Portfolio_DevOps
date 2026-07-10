@@ -22,7 +22,7 @@ jobs:
       PYTHONUTF8: 1
 
     steps:
-       Cinderella - name: Checkout Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Install Dependencies
@@ -30,7 +30,6 @@ jobs:
         run: |
           & $env:PYTHON_EXE -m pip install --upgrade pip
           if (Test-Path requirements.txt) {
-            # Added --upgrade and --prefer-binary to safely navigate local venv file locks
             & $env:PYTHON_EXE -m pip install -r requirements.txt --upgrade --prefer-binary
           }
 
